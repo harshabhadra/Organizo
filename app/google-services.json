@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1098007663032",
+    "firebase_url": "https://organizo-5dd1a.firebaseio.com",
+    "project_id": "organizo-5dd1a",
+    "storage_bucket": "organizo-5dd1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098007663032:android:353d40296ecdeb9cb3ff4d",
+        "android_client_info": {
+          "package_name": "com.harshabhadra.organizo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098007663032-ng6ee0o3ti0nub0dmuhvnhs21qg07pu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harshabhadra.organizo",
+            "certificate_hash": "43cb265701e446d579d9deed434cc67754d960d7"
+          }
+        },
+        {
+          "client_id": "1098007663032-q0vlgcvbr6utsbbskaho2u1mk9fr98hd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfRoSX5LbR048tFFqqwwqF0jJPyujSRrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098007663032-q0vlgcvbr6utsbbskaho2u1mk9fr98hd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
