@@ -1,26 +1,32 @@
 package com.harshabhadra.organizo.User.createAccount
 
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.databinding.FragmentSignUpBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class SignUpFragment : Fragment() {
+class SignUpFragment : Fragment(), View.OnKeyListener {
 
     private lateinit var signUpViewModel: SignUpViewModel
     private lateinit var name: String
     private lateinit var signUpBinding: FragmentSignUpBinding
+    private var loadingDialog: AlertDialog? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +47,7 @@ class SignUpFragment : Fragment() {
             val password = signUpBinding.signUpPasswordTextInput.text.toString()
             val confirmPassword = signUpBinding.signUpConfirmPasswordTextInput.text.toString()
             name = signUpBinding.signUpNameTextinput.text.toString()
-            verifyCreandCreateAccount(name,email,password,confirmPassword)
+            verifyCredAndCreateAccount(name, email, password, confirmPassword)
         }
 
         //Set OnclickListener to already user button
@@ -53,37 +59,70 @@ class SignUpFragment : Fragment() {
         signUpViewModel.user.observe(viewLifecycleOwner, Observer { user ->
             user?.let {
                 user.displayName?.let {
+                    loadingDialog?.dismiss()
                     Toast.makeText(context, "Welcome ${user.displayName}", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
         })
-        
+
+        signUpBinding.signUpNameTextinput.setOnKeyListener(this)
+        signUpBinding.signUpEmailTextInput.setOnKeyListener(this)
+        signUpBinding.signUpPasswordTextInput.setOnKeyListener(this)
+        signUpBinding.signUpConfirmPasswordTextInput.setOnKeyListener(this)
         return signUpBinding.root
     }
 
-    fun verifyCreandCreateAccount(
+    private fun verifyCredAndCreateAccount(
         name: String,
         email: String,
         password: String,
         conPassword: String
-    ){
-        if (!(TextUtils.isEmpty(name)) && signUpViewModel.verifyEmail(email) && signUpViewModel.validatePassword(
-            password,
-            conPassword
-        )){
-            signUpViewModel.createAccount(name, email, password)
-        }else if (!(TextUtils.isEmpty(name))){
-            signUpBinding.signUpNameTextinput.setError("Enter Name")
-        }else if (!signUpViewModel.verifyEmail(email)){
-            signUpBinding.signUpEmailTextInput.setError("Enter a valid Email")
-        }else if (!signUpViewModel.validatePassword(password, conPassword)){
-            signUpBinding.signUpPasswordTextInput.setError("Password Mismatch")
+    ) {
+        when {
+            !(TextUtils.isEmpty(name)) && signUpViewModel.verifyEmail(email) && signUpViewModel.validatePassword(
+                password
+            ) && signUpViewModel.matchPassword(password, conPassword)
+            -> {
+                loadingDialog = createLoadingDialog()
+                loadingDialog?.show()
+                signUpViewModel.createAccount(name, email, password)
+            }
+            TextUtils.isEmpty(name) -> {
+                signUpBinding.signUpNameTextinputLayout.error = "Enter Name"
+            }
+            !signUpViewModel.verifyEmail(email) -> {
+                signUpBinding.signUpEmailTextInputLayout.error = "Enter a valid Email"
+            }
+            !signUpViewModel.validatePassword(password) -> {
+                signUpBinding.signUpPasswordTextInputLayout.error = "Enter a valid Password"
+            }
+            !signUpViewModel.matchPassword(password, conPassword) -> {
+                signUpBinding.signUpConfirmPasswordTextInputLayout.error = "Password Mismatch"
+            }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        signUpViewModel.getCurrentUser()
+    //Create Loading Dialog
+    private fun createLoadingDialog(): AlertDialog? {
+        val layout: View =LayoutInflater.from(context).inflate(R.layout.loading_layout, null)
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setView(layout)
+        builder?.setCancelable(false)
+        return builder?.create()
+    }
+
+    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+        when (v) {
+            signUpBinding.signUpNameTextinput -> signUpBinding.signUpNameTextinputLayout.isErrorEnabled =
+                false
+            signUpBinding.signUpEmailTextInput -> signUpBinding.signUpEmailTextInputLayout.isErrorEnabled =
+                false
+            signUpBinding.signUpPasswordTextInput -> signUpBinding.signUpPasswordTextInputLayout.isErrorEnabled =
+                false
+            signUpBinding.signUpConfirmPasswordTextInput -> signUpBinding.signUpConfirmPasswordTextInputLayout.isErrorEnabled =
+                false
+        }
+        return false
     }
 }

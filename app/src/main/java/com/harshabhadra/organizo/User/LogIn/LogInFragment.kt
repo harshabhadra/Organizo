@@ -20,7 +20,6 @@ import com.harshabhadra.organizo.databinding.FragmentLogInBinding
 class LogInFragment : Fragment() {
 
     private lateinit var logInViewModel: LogInViewModel
-    private var firebaseUser:FirebaseUser? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +42,8 @@ class LogInFragment : Fragment() {
         super.onStart()
         logInViewModel.getCurrentUser()
         logInViewModel.currentUser.observe(viewLifecycleOwner, Observer { user->
-            firebaseUser = user
-            firebaseUser?.let {
-                Toast.makeText(context,"Welcome",Toast.LENGTH_SHORT).show()
-            }?:let {
-                Toast.makeText(context,"Sign In To Continue",Toast.LENGTH_SHORT).show()
+              user?.displayName?.let {
+                Toast.makeText(context,"Welcome ${user.displayName}",Toast.LENGTH_SHORT).show()
             }
         })
     }

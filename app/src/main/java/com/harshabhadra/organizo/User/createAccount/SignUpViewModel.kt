@@ -30,11 +30,6 @@ class SignUpViewModel(private val context: Activity) : ViewModel() {
     val user: LiveData<FirebaseUser?>
         get() = _user
 
-    //Function to get currentUser
-    fun getCurrentUser() {
-        _user.value = auth.currentUser
-    }
-
     //Creating Account with email and password
     fun createAccount(name: String, email: String, password: String) {
         uiScope.launch {
@@ -66,10 +61,14 @@ class SignUpViewModel(private val context: Activity) : ViewModel() {
     }
 
     //validate password
-    fun validatePassword(password: String, conPassword:String):Boolean{
-        return ((!TextUtils.isEmpty(password) && !(TextUtils.isEmpty(conPassword)&& (password.length>=6) && password.equals(conPassword))))
+    fun validatePassword(password: String):Boolean{
+        return ((!TextUtils.isEmpty(password)&& (password.length>=6)))
     }
 
+    //Match password
+    fun matchPassword(password: String, conPassword:String):Boolean{
+        return (!TextUtils.isEmpty(conPassword) && conPassword == password)
+    }
     //Update user profile
     fun updateProfileInfo(userName: String, user: FirebaseUser?) {
         uiScope.launch {
