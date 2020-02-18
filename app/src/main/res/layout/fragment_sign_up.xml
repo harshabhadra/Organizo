@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
     </data>
 
     <ScrollView
@@ -58,6 +57,7 @@
                         style="@style/TextInputLayout.SignUp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:errorEnabled="true"
                         android:layout_marginTop="8dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -76,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="8dp"
+                        app:errorEnabled="true"
                         app:helperTextTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -117,6 +118,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:passwordToggleEnabled="true"
+                        app:errorEnabled="true"
+                        app:helperTextEnabled="true"
                         android:layout_marginTop="8dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -135,6 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:passwordToggleEnabled="true"
+                        app:errorEnabled="true"
                         android:layout_marginBottom="8dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -163,6 +167,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/already_user_button"
                 style="@style/LogInTextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
