@@ -1,4 +1,4 @@
-package com.harshabhadra.organizo.ui.home
+package com.harshabhadra.organizo.User
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,17 +7,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 private lateinit var auth: FirebaseAuth
-
-class HomeViewModel : ViewModel() {
+class SplashViewModel:ViewModel(){
 
     init {
         auth = FirebaseAuth.getInstance()
     }
 
+    //Store current user
     private var _currentUser = MutableLiveData<FirebaseUser?>()
     val currentUser: LiveData<FirebaseUser?>
         get() = _currentUser
 
+    //Function to get currentUser
     fun getCurrentUser(){
         _currentUser.value = auth.currentUser
     }

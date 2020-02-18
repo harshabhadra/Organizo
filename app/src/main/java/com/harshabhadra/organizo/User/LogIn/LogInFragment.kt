@@ -1,6 +1,7 @@
 package com.harshabhadra.organizo.User.LogIn
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
+import com.harshabhadra.organizo.MainActivity
 
 import com.harshabhadra.organizo.databinding.FragmentLogInBinding
 
@@ -28,23 +30,30 @@ class LogInFragment : Fragment() {
         // Inflate the layout for this fragment
         val loginBinding = FragmentLogInBinding.inflate(inflater, container, false)
 
+        val viewModelFactory =  LogInViewModelFactory(activity!!)
         //Initializing ViewModel class
-        logInViewModel = ViewModelProvider(this).get(LogInViewModel::class.java)
+        logInViewModel = ViewModelProvider(this,viewModelFactory).get(LogInViewModel::class.java)
+
+        //Observe the user object from view model class
+        logInViewModel.user.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val  intent = Intent(activity,MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
         val creteAccountButton = loginBinding.createAccountButton
+        //Set on click listener to the create account button
         creteAccountButton.setOnClickListener {
             findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToSignUpFragment())
         }
-        return loginBinding.root
-    }
 
-    override fun onStart() {
-        super.onStart()
-        logInViewModel.getCurrentUser()
-        logInViewModel.currentUser.observe(viewLifecycleOwner, Observer { user->
-              user?.displayName?.let {
-                Toast.makeText(context,"Welcome ${user.displayName}",Toast.LENGTH_SHORT).show()
-            }
-        })
+        loginBinding.loginButton.setOnClickListener {
+            val email= loginBinding.logInEmailTextInput.text.toString()
+            val password = loginBinding.logInPasswordTextInput.text.toString()
+            logInViewModel.logInUser(email, password)
+        }
+
+        return loginBinding.root
     }
 }

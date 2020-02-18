@@ -70,7 +70,7 @@ class SignUpViewModel(private val context: Activity) : ViewModel() {
         return (!TextUtils.isEmpty(conPassword) && conPassword == password)
     }
     //Update user profile
-    fun updateProfileInfo(userName: String, user: FirebaseUser?) {
+    private fun updateProfileInfo(userName: String, user: FirebaseUser?) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 val profileUpdates = UserProfileChangeRequest.Builder()
