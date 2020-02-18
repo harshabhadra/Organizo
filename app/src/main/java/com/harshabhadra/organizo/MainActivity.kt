@@ -1,8 +1,11 @@
 package com.harshabhadra.organizo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -16,11 +19,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.harshabhadra.organizo.User.LogInActivity
 import com.infideap.drawerbehavior.Advance3DDrawerLayout
 import com.infideap.drawerbehavior.AdvanceDrawerLayout
 
-
-class MainActivity : AppCompatActivity() {
+private lateinit var auth: FirebaseAuth
+class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -30,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        auth = FirebaseAuth.getInstance()
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -40,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        drawerLayout.setViewRotation(Gravity.START,15F)
-        drawerLayout.setViewElevation(Gravity.START,15F)
+        drawerLayout.setViewRotation(Gravity.START, 15F)
+        drawerLayout.setViewElevation(Gravity.START, 15F)
 
         appBarConfiguration = AppBarConfiguration(
             navController.graph, drawerLayout
@@ -66,5 +72,23 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        signOutUser(id)
+        return true
+    }
+
+    fun signOutUser(itemId: Int) {
+
+        if(itemId == R.id.log_out) {
+            auth.signOut().let {
+                Toast.makeText(this,"Sign-out",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LogInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }

@@ -28,4 +28,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="already_user">Already User?</string>
     <string name="please_wait">Please wait</string>
+    <string name="log_out">Log out</string>
 </resources>

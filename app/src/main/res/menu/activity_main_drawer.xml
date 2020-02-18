@@ -34,5 +34,6 @@
                 android:title="@string/menu_send" />
         </menu>
     </item>
-
+    <item android:id="@+id/log_out"
+        android:title="@string/log_out"/>
 </menu>
