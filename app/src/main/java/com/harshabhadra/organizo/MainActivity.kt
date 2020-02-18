@@ -1,6 +1,7 @@
 package com.harshabhadra.organizo
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,6 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.infideap.drawerbehavior.Advance3DDrawerLayout
+import com.infideap.drawerbehavior.AdvanceDrawerLayout
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,11 +36,13 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerLayout: Advance3DDrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        drawerLayout.setViewRotation(Gravity.START,15F)
+        drawerLayout.setViewElevation(Gravity.START,15F)
+
         appBarConfiguration = AppBarConfiguration(
             navController.graph, drawerLayout
         )
