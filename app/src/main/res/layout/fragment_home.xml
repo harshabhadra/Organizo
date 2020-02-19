@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,43 +9,47 @@
             type="com.harshabhadra.organizo.ui.home.HomeViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".ui.home.HomeFragment"
+        android:background="@drawable/ic_home_background">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/collapsing_tool_bar_height"
-                android:fitsSystemWindows="true">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/home_title_text"
-                    style="@style/TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:fontFamily="@font/hind_siliguri_bold"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@{`Hello! ` + homeViewModel.userName}"
-                    tools:text="Hello, Harsha" />
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            style="@style/homeFav"
             android:src="@drawable/ic_add_white_24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{`Hello \n` + homeViewModel.userName}"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:fontFamily="@font/hind_siliguri_bold"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.708"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/empty_box" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

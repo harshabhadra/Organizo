@@ -8,25 +8,35 @@
         <item name="toolbarStyle">@style/myToolBar</item>
         <item name="drawerArrowStyle">@style/drawerArrow</item>
         <item name="actionMenuTextColor">@android:color/white</item>
-        <item name="alertDialogTheme">@style/myAletDialog</item>
+        <item name="alertDialogTheme">@style/loadingAlertDialog</item>
         <item name="android:titleTextAppearance">@font/hind_siliguri_bold</item>
     </style>
 
-    <style name="myAletDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+    <style name="loadingAlertDialog" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
     <style name="drawerArrow" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
+        <item name="android:navigationIcon">@drawable/ic_account_circle_white_24dp</item>
+        <item name="android:closeIcon">@drawable/ic_account_circle_white_24dp</item>
         <item name="color">@android:color/white</item>
     </style>
+
     <style name="myToolBar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:backgroundTint">@color/colorPrimary</item>
         <item name="titleTextColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/hind_siliguri_bold</item>
     </style>
 
+    <style name="homeFav" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/colorButton</item>
+        <item name="elevation">@dimen/favElevation</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="drawerArrowStyle">@style/drawerArrow</item>
         <item name="android:statusBarColor">@color/statusBar</item>
     </style>
 
@@ -46,7 +56,7 @@
     </style>
 
     <style name="LogInButtonAppearence" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="backgroundTint">@color/colorLogInButton</item>
+        <item name="backgroundTint">@color/colorButton</item>
         <item name="cornerRadius">32dp</item>
         <item name="android:textSize">16sp</item>
         <item name="elevation">16dp</item>

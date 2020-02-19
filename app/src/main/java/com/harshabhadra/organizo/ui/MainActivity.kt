@@ -3,6 +3,7 @@ package com.harshabhadra.organizo.ui
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -13,6 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.databinding.ActivityMainBinding
 import com.infideap.drawerbehavior.Advance3DDrawerLayout
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar = mainBinding.mainToolbar
         setSupportActionBar(toolbar)
         drawerLayout = mainBinding.mainDrawerLayout
+        toolbar?.setNavigationIcon(R.drawable.ic_account_circle_white_24dp)
         val navController = this.findNavController(R.id.main_nav_host_fragment)
         NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
