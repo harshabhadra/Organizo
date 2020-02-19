@@ -35,7 +35,7 @@ class HomeViewModel(private val activity: Activity) : ViewModel() {
     fun getCurrentUser() {
         uiScope.launch {
             _currentUser.value = auth.currentUser
-            _userName.value = _currentUser.value?.displayName
+            _userName.value = _currentUser.value?.displayName!!.split(" ")[0]
         }
     }
 
