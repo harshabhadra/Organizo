@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.databinding.FragmentLogInBinding
 import com.harshabhadra.organizo.ui.MainActivity
 
@@ -19,7 +21,7 @@ import com.harshabhadra.organizo.ui.MainActivity
 class LogInFragment : Fragment() {
 
     private lateinit var logInViewModel: LogInViewModel
-
+    private var loadingDialog: AlertDialog? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,9 +36,12 @@ class LogInFragment : Fragment() {
         //Observe the user object from view model class
         logInViewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
+                loadingDialog?.dismiss()
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
+            }?:let {
+                loadingDialog?.dismiss()
             }
         })
 
@@ -49,9 +54,20 @@ class LogInFragment : Fragment() {
         loginBinding.loginButton.setOnClickListener {
             val email = loginBinding.logInEmailTextInput.text.toString()
             val password = loginBinding.logInPasswordTextInput.text.toString()
+            loadingDialog = createLoadingDialog()
+            loadingDialog?.show()
             logInViewModel.logInUser(email, password)
         }
 
         return loginBinding.root
+    }
+
+    //Create Loading Dialog
+    private fun createLoadingDialog(): AlertDialog? {
+        val layout: View = LayoutInflater.from(context).inflate(R.layout.log_in_loading, null)
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setView(layout)
+        builder?.setCancelable(false)
+        return builder?.create()
     }
 }

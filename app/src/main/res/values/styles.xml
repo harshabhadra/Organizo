@@ -7,8 +7,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="toolbarStyle">@style/myToolBar</item>
         <item name="drawerArrowStyle">@style/drawerArrow</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="alertDialogTheme">@style/myAletDialog</item>
     </style>
 
+    <style name="myAletDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
     <style name="drawerArrow" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>

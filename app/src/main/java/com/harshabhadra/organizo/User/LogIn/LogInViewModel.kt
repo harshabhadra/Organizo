@@ -39,6 +39,7 @@ class LogInViewModel(private val context: Activity) : ViewModel() {
                             Log.w("LogInViewModel", "signInWithEmail:failure", task.exception)
                             Toast.makeText(context, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show()
+                            _user.value = null
                         }
                     }
             }
