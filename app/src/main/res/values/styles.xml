@@ -5,15 +5,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarStyle">@style/myToolBar</item>
+        <item name="drawerArrowStyle">@style/drawerArrow</item>
     </style>
 
     <style name="drawerArrow" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="color">@color/colorPrimary</item>
+        <item name="color">@android:color/white</item>
     </style>
     <style name="myToolBar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:backgroundTint">@android:color/white</item>
-        <item name="titleTextColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="titleTextColor">@android:color/white</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

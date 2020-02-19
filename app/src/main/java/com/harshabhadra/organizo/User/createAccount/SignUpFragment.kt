@@ -1,7 +1,5 @@
 package com.harshabhadra.organizo.User.createAccount
 
-
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,15 +7,14 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.harshabhadra.organizo.MainActivity
 import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.databinding.FragmentSignUpBinding
+import com.harshabhadra.organizo.ui.MainActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -62,7 +59,7 @@ class SignUpFragment : Fragment(), View.OnKeyListener {
             user?.let {
                 user.displayName?.let {
                     loadingDialog?.dismiss()
-                   val intent = Intent(activity,MainActivity::class.java)
+                   val intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
                 }
@@ -108,7 +105,7 @@ class SignUpFragment : Fragment(), View.OnKeyListener {
 
     //Create Loading Dialog
     private fun createLoadingDialog(): AlertDialog? {
-        val layout: View =LayoutInflater.from(context).inflate(R.layout.loading_layout, null)
+        val layout: View = LayoutInflater.from(context).inflate(R.layout.loading_layout, null)
         val builder = context?.let { AlertDialog.Builder(it) }
         builder?.setView(layout)
         builder?.setCancelable(false)
