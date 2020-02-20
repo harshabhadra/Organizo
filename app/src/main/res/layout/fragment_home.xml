@@ -14,10 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_home_background">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".ui.home.HomeFragment">
+
             <TextView
                 android:id="@+id/textView3"
                 style="@style/TextAppearance.AppCompat.Display1"
@@ -111,14 +113,76 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/category_recycler" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_task_fab"
-            style="@style/homeFav"
+
+        <View
+            android:id="@+id/trans_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"/>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:src="@drawable/ic_add_white_24dp" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/add_project_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/fab_margin">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:fontFamily="@font/hind_siliguri_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/projects" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_projects_fab"
+                    style="@style/Organizo.taskfab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    android:src="@drawable/ic_project_white_24dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_task_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="@dimen/fab_margin">
+                <TextView
+                    style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:fontFamily="@font/hind_siliguri_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/task" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_task_fab"
+                    style="@style/Organizo.taskfab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    android:src="@drawable/ic_task_24dp" />
+
+            </LinearLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_fab"
+                style="@style/homeFav"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:src="@drawable/ic_add_white_24dp" />
+        </LinearLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

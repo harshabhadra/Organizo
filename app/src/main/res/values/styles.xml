@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="toolbarStyle">@style/myToolBar</item>
+        <item name="toolbarStyle">@style/Organizo.Toolbar</item>
         <item name="drawerArrowStyle">@style/drawerArrow</item>
         <item name="actionMenuTextColor">@android:color/white</item>
         <item name="alertDialogTheme">@style/loadingAlertDialog</item>
@@ -23,7 +23,7 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="myToolBar" parent="Widget.MaterialComponents.Toolbar">
+    <style name="Organizo.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:backgroundTint">@color/colorPrimary</item>
         <item name="titleTextColor">@android:color/white</item>
         <item name="android:fontFamily">@font/hind_siliguri_bold</item>
@@ -33,6 +33,12 @@
         <item name="backgroundTint">@color/colorButton</item>
         <item name="elevation">@dimen/favElevation</item>
         <item name="rippleColor">@android:color/white</item>
+        <item name="tint">@android:color/white</item>
+    </style>
+    <style name="Organizo.taskfab" parent="homeFav">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="fabSize">mini</item>
+        <item name="elevation">0dp</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -95,6 +101,8 @@
 
     <style name="Organizo.editText" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/hind_siliguri_bold</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
         <item name="android:textColorHint">@color/colorHintText</item>
     </style>
