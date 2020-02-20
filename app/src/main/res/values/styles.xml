@@ -32,6 +32,7 @@
     <style name="homeFav" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">@color/colorButton</item>
         <item name="elevation">@dimen/favElevation</item>
+        <item name="rippleColor">@android:color/white</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -65,9 +66,37 @@
         <item name="rippleColor">@android:color/white</item>
     </style>
 
+    <style name="Organizo.spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:text">@string/select_category</item>
+        <item name="android:fontFamily">@font/hind_siliguri_bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:elevation">16dp</item>
+    </style>
+
+    <style name="Organizo.addTaskToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@android:color/white</item>
+        <item name="titleTextColor">@android:color/black</item>
+    </style>
+
     <style name="LogInTextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Organizo.selectButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@android:color/white</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="rippleColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Organizo.editText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
+        <item name="android:textColorHint">@color/colorHintText</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

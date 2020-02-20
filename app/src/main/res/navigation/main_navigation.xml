@@ -8,8 +8,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.harshabhadra.organizo.ui.home.HomeFragment"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_home" />
+        android:label=" "
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment"
+            app:enterAnim="@anim/card_flip_right_in"
+            app:exitAnim="@anim/card_flip_right_out"
+            app:popEnterAnim="@anim/card_flip_left_in"
+            app:popExitAnim="@anim/card_flip_left_out" />
+    </fragment>
     <fragment
         android:id="@+id/reportFragment"
         android:name="com.harshabhadra.organizo.ui.ReportFragment"
@@ -20,4 +28,13 @@
         android:name="com.harshabhadra.organizo.ProjectsFragment"
         android:label="Projects"
         tools:layout="@layout/fragment_projects" />
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.harshabhadra.organizo.ui.AddTaskFragment"
+        android:label="Add Task"
+        tools:layout="@layout/fragment_add_task">
+        <action
+            android:id="@+id/action_addTaskFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

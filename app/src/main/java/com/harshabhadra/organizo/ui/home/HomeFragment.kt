@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.harshabhadra.organizo.User.LogInActivity
 import com.harshabhadra.organizo.databinding.FragmentHomeBinding
@@ -33,6 +33,18 @@ class HomeFragment : Fragment() {
         setHasOptionsMenu(true)
         homeBinding.homeViewModel = homeViewModel
         homeBinding.lifecycleOwner = this
+
+        homeBinding.emptyBox.setOnClickListener {
+            Toast.makeText(
+                context,
+                "Add your task or projects and stay organize",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        homeBinding.addTaskFab.setOnClickListener {
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddTaskFragment())
+        }
         return homeBinding.root
     }
 
@@ -45,7 +57,7 @@ class HomeFragment : Fragment() {
 
         val id = item.itemId
         if (id == com.harshabhadra.organizo.R.id.action_log_out) {
-         FirebaseAuth.getInstance().signOut()
+            FirebaseAuth.getInstance().signOut()
             val intent = Intent(activity, LogInActivity::class.java)
             startActivity(intent)
             activity?.finish()
