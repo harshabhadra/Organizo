@@ -51,27 +51,35 @@ class HomeFragment : Fragment() {
 
         //Hiding views
         initView(homeBinding.addProjectLayout)
-        initView(homeBinding.addTaskLayout)
+        initView(homeBinding.startTaskLayout)
+        initView(homeBinding.saveTaskLayout)
         initView(homeBinding.transView)
 
         //Set on click listener to the visible fab button
         homeBinding.addFab.setOnClickListener {
             isRotate = rotateFab(it, !isRotate)
             if (isRotate) {
-                showIn(homeBinding.addTaskLayout)
+                showIn(homeBinding.startTaskLayout)
+                showIn(homeBinding.saveTaskLayout)
                 showIn(homeBinding.addProjectLayout)
                 showIn(homeBinding.transView)
             }else{
                 showOut(homeBinding.transView)
                 showOut(homeBinding.addProjectLayout)
-                showOut(homeBinding.addTaskLayout)
+                showOut(homeBinding.startTaskLayout)
+                showOut(homeBinding.saveTaskLayout)
             }
         }
 
         //Set on click listener to the add task fab button
-        homeBinding.addTaskFab.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddTaskFragment())
+        homeBinding.startTaskLayout.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddTaskFragment(true))
             isRotate = false
+        }
+
+        //Set on click listener to the save task fab button
+        homeBinding.saveTaskLayout.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddTaskFragment(false))
         }
 
         //Set on click listener to the add project fab button

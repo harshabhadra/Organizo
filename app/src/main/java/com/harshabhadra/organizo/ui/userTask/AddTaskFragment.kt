@@ -1,24 +1,22 @@
-package com.harshabhadra.organizo.ui
+package com.harshabhadra.organizo.ui.userTask
 
 
-import android.app.Activity
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import com.harshabhadra.organizo.MainNavigation
-
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat
 import com.harshabhadra.organizo.R
-import com.harshabhadra.organizo.Viewanimation
+
 import com.harshabhadra.organizo.Viewanimation.initView
 import com.harshabhadra.organizo.Viewanimation.rotateFab
 import com.harshabhadra.organizo.Viewanimation.showIn
 import com.harshabhadra.organizo.Viewanimation.showOut
 import com.harshabhadra.organizo.databinding.FragmentAddTaskBinding
+import kotlinx.android.synthetic.main.add_task_body.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -26,7 +24,7 @@ import com.harshabhadra.organizo.databinding.FragmentAddTaskBinding
 class AddTaskFragment : Fragment() {
 
     private lateinit var addTaskBinding: FragmentAddTaskBinding
-    private var isRotate = false
+    private var isStart:Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,22 +33,12 @@ class AddTaskFragment : Fragment() {
         // Inflate the layout for this fragment
         addTaskBinding = FragmentAddTaskBinding.inflate(inflater, container, false)
 
-        //hiding views
-        initView(addTaskBinding.startTaskLayout)
-        initView(addTaskBinding.saveTaskLayout)
-        initView(addTaskBinding.addTransView)
+        //Check what to do Start or save task
+        isStart = arguments?.getBoolean("isStart")!!
 
-        addTaskBinding.chooseFab.setOnClickListener {
-            isRotate = rotateFab(it,!isRotate)
-            if (isRotate){
-                showIn(addTaskBinding.startTaskLayout)
-                showIn(addTaskBinding.saveTaskLayout)
-                showIn(addTaskBinding.addTransView)
-            }else{
-                showOut(addTaskBinding.startTaskLayout)
-                showOut(addTaskBinding.saveTaskLayout)
-                showOut(addTaskBinding.addTransView)
-            }
+        if (!isStart){
+            addTaskBinding.addTaskBody.end_time_card.visibility = View.VISIBLE
+            addTaskBinding.chooseFab.setImageDrawable(context?.let {getDrawable(it,R.drawable.ic_save_black_24dp) })
         }
         return addTaskBinding.root
     }

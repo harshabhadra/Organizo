@@ -20,117 +20,53 @@
                 android:layout_height="156dp"
                 android:background="@drawable/ic_add_task_header"
                 app:layout_scrollFlags="exitUntilCollapsed">
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
 
                     <EditText
                         android:id="@+id/editText"
                         style="@style/Organizo.editText"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:ems="10"
                         android:hint="@string/task_name"
-                        android:inputType="textPersonName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:inputType="textPersonName" />
 
                     <TextView
                         android:id="@+id/textView7"
                         style="@style/TextAppearance.AppCompat.Medium"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:drawableEnd="@drawable/ic_add_circle_white_24dp"
                         android:drawablePadding="16dp"
                         android:fontFamily="@font/hind_siliguri_light"
                         android:paddingTop="16dp"
                         android:text="@string/add_category"
-                        android:textColor="@android:color/white"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editText" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
-        <View
-            android:id="@+id/add_trans_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/start_task_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/fab_margin">
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/hind_siliguri_bold"
-                    android:gravity="center"
-                    android:text="@string/start"
-                    android:textColor="@color/colorPrimary" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/start_task_fab"
-                    style="@style/Organizo.taskfab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/fab_margin"
-                    android:src="@drawable/ic_play_arrow_black_24dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/save_task_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginBottom="@dimen/fab_margin">
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/hind_siliguri_bold"
-                    android:gravity="center"
-                    android:text="@string/save"
-                    android:textColor="@color/colorPrimary" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/save_task_fab"
-                    style="@style/Organizo.taskfab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/fab_margin"
-                    android:src="@drawable/ic_save_black_24dp" />
-
-            </LinearLayout>
+        <include layout="@layout/add_task_body"
+            android:id="@+id/add_task_body"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/choose_fab"
                 style="@style/homeFav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="bottom|end"
                 android:layout_marginEnd="@dimen/fab_margin"
                 android:layout_marginBottom="@dimen/fab_margin"
-                android:src="@drawable/ic_add_white_24dp" />
-        </LinearLayout>
+                android:src="@drawable/ic_play_arrow_black_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

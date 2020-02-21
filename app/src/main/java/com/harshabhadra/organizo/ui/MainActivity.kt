@@ -3,7 +3,6 @@ package com.harshabhadra.organizo.ui
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,7 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.harshabhadra.organizo.MainNavigation
 import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.databinding.ActivityMainBinding
 import com.infideap.drawerbehavior.Advance3DDrawerLayout
