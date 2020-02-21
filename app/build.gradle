@@ -69,5 +69,9 @@ dependencies {
     //LottieAnimation
     implementation 'com.airbnb.android:lottie:3.3.1'
 
+    //Custom Drawer
     implementation 'com.infideap.drawerbehavior:drawer-behavior:0.2.2'
+
+    //Date and Time Picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 }

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="addTaskViewModel"
+            type="com.harshabhadra.organizo.ui.userTask.AddTaskViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -57,7 +60,8 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/add_task_body"
-            android:id="@+id/add_task_body"/>
+            android:id="@+id/add_task_body"
+            bind:addTaskViewModel="@{addTaskViewModel}"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/choose_fab"
