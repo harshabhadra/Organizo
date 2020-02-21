@@ -11,6 +11,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.harshabhadra.organizo.MainNavigation
 import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.databinding.ActivityMainBinding
 import com.infideap.drawerbehavior.Advance3DDrawerLayout
@@ -29,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         drawerLayout = mainBinding.mainDrawerLayout
         val navController = this.findNavController(R.id.main_nav_host_fragment)
-        NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-
+        toolbar.setupWithNavController(navController, drawerLayout)
+        NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
         // prevent nav gesture if not on start destination
         navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
             if (nd.id == nc.graph.startDestination) {
@@ -50,4 +52,5 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.main_nav_host_fragment)
         return NavigationUI.navigateUp(navController,appBarConfiguration)
     }
+
 }

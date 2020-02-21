@@ -5,7 +5,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="toolbarStyle">@style/Organizo.Toolbar</item>
         <item name="drawerArrowStyle">@style/drawerArrow</item>
         <item name="actionMenuTextColor">@android:color/white</item>
         <item name="alertDialogTheme">@style/loadingAlertDialog</item>
@@ -18,15 +17,7 @@
 
     <style name="drawerArrow" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="android:navigationIcon">@drawable/ic_account_circle_white_24dp</item>
-        <item name="android:closeIcon">@drawable/ic_account_circle_white_24dp</item>
         <item name="color">@android:color/white</item>
-    </style>
-
-    <style name="Organizo.Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="titleTextColor">@android:color/white</item>
-        <item name="android:fontFamily">@font/hind_siliguri_bold</item>
     </style>
 
     <style name="homeFav" parent="Widget.MaterialComponents.FloatingActionButton">

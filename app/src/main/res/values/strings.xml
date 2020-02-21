@@ -38,4 +38,6 @@
     <string name="add_category">Add Category</string>
     <string name="add_a_descripton">Add a descripton</string>
     <string name="task">Task</string>
+    <string name="start">Start</string>
+    <string name="save">Save</string>
 </resources>
