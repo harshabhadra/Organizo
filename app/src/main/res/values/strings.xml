@@ -45,4 +45,6 @@
     <string name="change_date">Change Date</string>
     <string name="save_task">Save Task</string>
     <string name="end_time">End Time</string>
+    <string name="add_end_time">Add End Time</string>
+    <string name="forget_password">Forget Password?</string>
 </resources>
