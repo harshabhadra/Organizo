@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class Task(
 
     @PrimaryKey(autoGenerate = true)
-    val taskId:Long,
+    val taskId:Long = 0L,
 
     @NonNull
     @ColumnInfo(name = "task_name")

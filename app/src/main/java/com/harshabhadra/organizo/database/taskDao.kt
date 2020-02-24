@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface taskDao {
+interface TaskDao {
 
     @Insert
     fun insertTask(task:Task)
@@ -22,5 +22,5 @@ interface taskDao {
     fun deleteAllTask()
 
     @Delete
-    fun deleteSingleTask(id: Long)
+    fun deleteSingleTask(task: Task)
 }
