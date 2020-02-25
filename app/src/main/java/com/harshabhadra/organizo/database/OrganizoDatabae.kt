@@ -4,12 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.harshabhadra.organizo.ioThread
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-@Database(entities = [Task::class], version = 3, exportSchema = false)
+@Database(entities = [Task::class, Category::class], version = 5, exportSchema = false)
 abstract class OrganizoDatabae : RoomDatabase() {
 
     //Connect the database to dao
     abstract val TaskDao: TaskDao
+    abstract val categoryDao:CategoryDao
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.
@@ -31,6 +36,11 @@ abstract class OrganizoDatabae : RoomDatabase() {
         @Volatile
         private var INSTANCE: OrganizoDatabae? = null
 
+        val PREPOPULATE_DATA = listOf(Category("Personal"),
+            Category("Work"), Category
+        ("Health")
+        )
+
         fun getInstance(context: Context): OrganizoDatabae {
 
             // Multiple threads can ask for the database at the same time, ensure we only initialize
@@ -45,7 +55,15 @@ abstract class OrganizoDatabae : RoomDatabase() {
                         context.applicationContext,
                         OrganizoDatabae::class.java,
                         "Organizo_databse"
-                    )
+                    ).addCallback(object : Callback(){
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            // insert the data on the IO Thread
+                            ioThread {
+                                getInstance(context).categoryDao.insertListOfCategory(PREPOPULATE_DATA)
+                            }
+                        }
+                    })
                         .fallbackToDestructiveMigration()
                         .build()
                 }

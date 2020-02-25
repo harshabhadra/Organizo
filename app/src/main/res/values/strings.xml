@@ -34,7 +34,7 @@
     <string name="home">Home</string>
     <string name="select_category">Select Category</string>
     <string name="task_name">Task Name</string>
-    <string name="add_category">Add Category</string>
+    <string name="add_category">Choose or Add Category</string>
     <string name="add_a_descripton">Add a descripton</string>
     <string name="start_task">Start Task</string>
     <string name="start">Start</string>
@@ -47,4 +47,7 @@
     <string name="end_time">End Time</string>
     <string name="add_end_time">Add End Time</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_category_name">Enter Category Name</string>
 </resources>

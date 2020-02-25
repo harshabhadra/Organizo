@@ -65,7 +65,7 @@ class LogInFragment : Fragment() {
     //Create Loading Dialog
     private fun createLoadingDialog(): AlertDialog? {
         val layout: View = LayoutInflater.from(context).inflate(R.layout.log_in_loading, null)
-        val builder = context?.let { AlertDialog.Builder(it) }
+        val builder = context?.let { AlertDialog.Builder(it,R.style.loadingAlertDialog) }
         builder?.setView(layout)
         builder?.setCancelable(false)
         return builder?.create()

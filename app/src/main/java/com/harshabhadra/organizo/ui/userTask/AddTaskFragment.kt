@@ -2,28 +2,32 @@ package com.harshabhadra.organizo.ui.userTask
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckedTextView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.harshabhadra.organizo.R
+import com.harshabhadra.organizo.database.Category
 import com.harshabhadra.organizo.databinding.FragmentAddTaskBinding
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
-import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.properties.Delegates
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
-    View.OnClickListener {
+    View.OnClickListener{
 
     private lateinit var addTaskBinding: FragmentAddTaskBinding
     private var isStart:Boolean = false
@@ -31,6 +35,7 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
     private var startTimeButtonClicked = false
     private var startDateButtonClicked = false
     private var isChecked: Boolean? = null
+    private lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +68,26 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
         addTaskBinding.addTaskBody.changeEndTimeButton.setOnClickListener(this)
         addTaskBinding.addTaskBody.endDateChangeButton.setOnClickListener(this)
         addTaskBinding.addTaskBody.checkedTextView.setOnClickListener(this)
+        addTaskBinding.addCategoryTv.setOnClickListener(this)
+
+        //Initializing category adapter
+         categoryAdapter = CategoryAdapter()
+        //Setting up the recyclerView
+        addTaskBinding.categoryNameRecycler.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        addTaskBinding.categoryNameRecycler.adapter = categoryAdapter
+
+        categoryAdapter.onItemClick = {
+            pos, view ->
+            val category = categoryAdapter.getCategoryItem(pos)
+            addTaskBinding.addCategoryTv.text = category.categoryName
+        }
+        //Observe category list
+        addTaskViewModel.allCategories.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                categoryAdapter.submitList(it)
+            }})
+
+        //Adding items to the category list if the list is empty
         return addTaskBinding.root
     }
 
@@ -127,6 +152,9 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
                     isChecked = false
                 }
             }
+            addTaskBinding.addCategoryTv ->{
+                openAddCategoryDialgo()
+            }
         }
     }
 
@@ -153,5 +181,30 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
         dpd.show(activity?.supportFragmentManager!!, "Datepickerdialog")
     }
 
+    //Open add Category dialog
+    private fun openAddCategoryDialgo(){
+        val layout: View = LayoutInflater.from(context).inflate(R.layout.add_category_dialog_layout, null)
+        val categoryNameET:EditText = layout.findViewById(R.id.dialog_category_name)
+        val createButton:Button = layout.findViewById(R.id.create_category_button)
+        val cancelButton:Button = layout.findViewById(R.id.close_cat_dialog_button)
+
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setView(layout)
+        builder?.setCancelable(false)
+        val dialog = builder?.create()
+        dialog?.show()
+
+        createButton.setOnClickListener {
+            val name = categoryNameET.text.toString()
+            if(name.isNotEmpty()){
+                val category = Category(name)
+                addTaskViewModel.insertCategory(category)
+                dialog?.dismiss()
+            }else{
+                Toast.makeText(context,"Category must have a name", Toast.LENGTH_SHORT).show()
+            }
+        }
+        cancelButton.setOnClickListener { dialog?.dismiss() }
+    }
 
 }

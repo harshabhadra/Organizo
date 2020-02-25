@@ -5,12 +5,48 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.harshabhadra.organizo.Repository
+import com.harshabhadra.organizo.database.Category
+import com.harshabhadra.organizo.database.Task
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
 
 class AddTaskViewModel(private val context: Application) : AndroidViewModel(context) {
+
+    //Initializing Corotiunes job
+   private val addTaskViewModelJOb = Job()
+
+    //Initialize scope
+   private val uiScope = CoroutineScope(Dispatchers.Main + addTaskViewModelJOb)
+
+    //Declaring repository
+    private val organizoRepository : Repository = Repository(context)
+
+    val allCategories:LiveData<List<Category>>
+
+    init {
+        allCategories = organizoRepository.getCategorieList()
+    }
+
+    //Insert a category to database
+    fun insertCategory(category: Category){
+        uiScope.launch {
+            organizoRepository.insertCategory(category)
+        }
+    }
+
+    //Insert a task
+    fun insertTask(task: Task){
+        uiScope.launch {
+            organizoRepository.insertTask(task)
+        }
+    }
 
     //Current Date String
     private var _dateString = MutableLiveData<String>()
@@ -53,9 +89,15 @@ class AddTaskViewModel(private val context: Application) : AndroidViewModel(cont
         return d.toString("E, dd MMM yyyy")
     }
 
+    //Change Time format
     fun changeTimeFormat(hour:Int, min:Int):String{
         val date = SimpleDateFormat("HH:mm", Locale.getDefault()).parse("$hour:$min")
         _timeString.value = date.toString("hh:mm aa")
         return date.toString("hh:mm aa")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        addTaskViewModelJOb.cancel()
     }
 }
