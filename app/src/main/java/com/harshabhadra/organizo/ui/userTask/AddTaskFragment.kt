@@ -14,9 +14,11 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harshabhadra.organizo.R
 import com.harshabhadra.organizo.database.Category
+import com.harshabhadra.organizo.database.Task
 import com.harshabhadra.organizo.databinding.FragmentAddTaskBinding
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
@@ -87,6 +89,18 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
                 categoryAdapter.submitList(it)
             }})
 
+        //Observe if the task is inserted
+        addTaskViewModel.taskInserted.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+           if(it == true) {
+               this.findNavController()
+                   .navigate(AddTaskFragmentDirections.actionAddTaskFragmentToHomeFragment())
+               addTaskViewModel.taskInserTionCompleted()
+           }
+        })
+
+        //Saving a task to the database
+        addTaskBinding.chooseFab.setOnClickListener(this)
+
         //Adding items to the category list if the list is empty
         return addTaskBinding.root
     }
@@ -154,6 +168,18 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
             }
             addTaskBinding.addCategoryTv ->{
                 openAddCategoryDialgo()
+            }
+            addTaskBinding.chooseFab ->{
+                if(!isStart){
+                    var taskName = addTaskBinding.taskNameTv.text.toString()
+                    var categoryName = addTaskBinding.addCategoryTv.text.toString()
+                    var taskDes = addTaskBinding.addTaskBody.taskDesEditText.text.toString()
+                    var startTime = addTaskBinding.addTaskBody.startTaskTimeTv.text.toString()
+                    var startDate = addTaskBinding.addTaskBody.startTaskDateTv.text.toString()
+                    val task = Task(taskName =taskName, taskCategory = categoryName, taskDescription = taskDes,
+                        startTime = startTime,startDate = startDate)
+                    addTaskViewModel.insertTask(task)
+                }
             }
         }
     }

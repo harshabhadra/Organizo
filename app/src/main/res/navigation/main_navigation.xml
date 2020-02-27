@@ -46,7 +46,13 @@
         tools:layout="@layout/fragment_add_task">
         <action
             android:id="@+id/action_addTaskFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/card_flip_left_in"
+            app:exitAnim="@anim/card_flip_left_out"
+            app:popEnterAnim="@anim/card_flip_right_in"
+            app:popExitAnim="@anim/card_flip_right_out"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="isStart"
             app:argType="boolean" />

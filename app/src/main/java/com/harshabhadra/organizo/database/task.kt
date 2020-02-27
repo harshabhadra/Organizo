@@ -26,12 +26,12 @@ data class Task(
     var startTime:String,
 
     @ColumnInfo(name = "task_end_time")
-    var endTime:String,
+    var endTime:String = " ",
 
     @NonNull
     @ColumnInfo(name = "task_start_date")
     var startDate:String,
 
     @ColumnInfo(name = "task_end_date")
-    var endDate:String
+    var endDate:String=" "
 )
