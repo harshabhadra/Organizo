@@ -113,6 +113,7 @@ class HomeFragment : Fragment() {
             it?.let{
                 homeCategoryAdapter.submitList(it)
                 homeBinding.emptyBox.visibility = View.INVISIBLE
+                Toast.makeText(context,"Name: ${it[0].categoryName}", Toast.LENGTH_SHORT).show()
             }?:let {
                 Toast.makeText(context,"Add new Categories", Toast.LENGTH_SHORT).show()
             }

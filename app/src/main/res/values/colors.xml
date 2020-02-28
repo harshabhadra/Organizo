@@ -6,5 +6,6 @@
     <color name="statusBar">#5a6abf</color>
     <color name="colorButton">#ffa000</color>
     <color name="transparent">#335a6abf</color>
+    <color name="blackTransparent">#55000000</color>
     <color name="colorHintText">#99FFFFFF</color>
 </resources>

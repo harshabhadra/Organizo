@@ -38,6 +38,7 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
     private var startDateButtonClicked = false
     private var isChecked: Boolean? = null
     private lateinit var categoryAdapter: CategoryAdapter
+    private var canInsertCat:Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,6 +88,7 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
         addTaskViewModel.allCategories.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it?.let {
                 categoryAdapter.submitList(it)
+                addTaskViewModel.noOfCategories(it.size)
             }})
 
         //Observe if the task is inserted
@@ -96,6 +98,11 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
                    .navigate(AddTaskFragmentDirections.actionAddTaskFragmentToHomeFragment())
                addTaskViewModel.taskInserTionCompleted()
            }
+        })
+
+        //Observe if user can add categories
+        addTaskViewModel.canInsert.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            canInsertCat = it
         })
 
         //Saving a task to the database
@@ -167,7 +174,11 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
                 }
             }
             addTaskBinding.addCategoryTv ->{
+                if (canInsertCat){
                 openAddCategoryDialgo()
+                }else{
+                    Toast.makeText(context,"You cannot add more Categories", Toast.LENGTH_SHORT).show()
+                }
             }
             addTaskBinding.chooseFab ->{
                 if(!isStart){
@@ -176,6 +187,7 @@ class AddTaskFragment : Fragment(), TimePickerDialog.OnTimeSetListener, DatePick
                     var taskDes = addTaskBinding.addTaskBody.taskDesEditText.text.toString()
                     var startTime = addTaskBinding.addTaskBody.startTaskTimeTv.text.toString()
                     var startDate = addTaskBinding.addTaskBody.startTaskDateTv.text.toString()
+
                     val task = Task(taskName =taskName, taskCategory = categoryName, taskDescription = taskDes,
                         startTime = startTime,startDate = startDate)
                     addTaskViewModel.insertTask(task)

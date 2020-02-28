@@ -30,11 +30,16 @@ class AddTaskViewModel(private val context: Application) : AndroidViewModel(cont
     val taskInserted: LiveData<Boolean>
         get() = _taskInserted
 
+    private var _canInsert = MutableLiveData<Boolean>()
+    val canInsert: LiveData<Boolean>
+        get() = _canInsert
+
     val allCategories: LiveData<List<Category>>
 
     init {
         allCategories = organizoRepository.getCategorieList()
         _taskInserted.value = false
+        _canInsert.value = true
     }
 
     //Insert a category to database
@@ -52,7 +57,7 @@ class AddTaskViewModel(private val context: Application) : AndroidViewModel(cont
         }
     }
 
-    fun taskInserTionCompleted(){
+    fun taskInserTionCompleted() {
         _taskInserted.value = false
     }
 
@@ -105,6 +110,10 @@ class AddTaskViewModel(private val context: Application) : AndroidViewModel(cont
         return date.toString("hh:mm aa")
     }
 
+    //checking no of elements in category
+    fun noOfCategories(num:Int){
+        _canInsert.value = num < 10
+    }
     override fun onCleared() {
         super.onCleared()
         addTaskViewModelJOb.cancel()

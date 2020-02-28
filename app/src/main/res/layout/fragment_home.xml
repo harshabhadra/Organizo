@@ -12,8 +12,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_home_background">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,9 +25,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/hind_siliguri_bold"
                 android:text="@{`Hello, ` + homeViewModel.userName}"
-                android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Hello, Subhamay" />
@@ -49,14 +48,14 @@
 
             <TextView
                 android:id="@+id/textView6"
-                style="@style/TextAppearance.AppCompat.Headline"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                tools:text="Fri, 28 Feb 2020"
                 android:fontFamily="@font/hind_siliguri_bold"
                 android:gravity="center"
                 android:text="@{homeViewModel.today}"
-                android:textColor="@android:color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -73,9 +72,6 @@
                 android:id="@+id/home_task_recycler"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +83,7 @@
             android:id="@+id/trans_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent" />
+            android:background="@color/blackTransparent" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -109,7 +105,7 @@
                     android:fontFamily="@font/hind_siliguri_bold"
                     android:gravity="center"
                     android:text="@string/projects"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@android:color/white" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/add_projects_fab"
@@ -135,7 +131,7 @@
                     android:fontFamily="@font/hind_siliguri_bold"
                     android:gravity="center"
                     android:text="@string/save_task"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@android:color/white" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/save_task_fab"
@@ -161,7 +157,7 @@
                     android:fontFamily="@font/hind_siliguri_bold"
                     android:gravity="center"
                     android:text="@string/start_task"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@android:color/white" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/start_task_fab"

@@ -9,7 +9,7 @@ import com.harshabhadra.organizo.ioThread
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-@Database(entities = [Task::class, Category::class], version = 5, exportSchema = false)
+@Database(entities = [Task::class, Category::class], version = 6, exportSchema = false)
 abstract class OrganizoDatabae : RoomDatabase() {
 
     //Connect the database to dao
